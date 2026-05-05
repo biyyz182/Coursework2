@@ -72,3 +72,6 @@ fprintf('Log file "capsule_temperature.txt" written.\n');
 % Call the function (a must already exist from earlier)
 a=arduino('COM3','Uno');
 temp_monitor(a);
+% Task 3 ：Temperature change rate monitoring and prediction
+a=arduino('COM3','Uno');
+temp_prediction(a);
