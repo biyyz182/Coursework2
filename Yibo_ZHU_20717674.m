@@ -54,12 +54,12 @@ fprintf('Min temp %.2f C\n',T_min);
 fprintf('Average temp %.2f C\n',T_avg);
 fprintf('Data logging terminated\n');
 fid = fopen('capsule_temperature.txt','w');
-fprintf(fid,'Data logging initiated : %s\n',datestr(now, 'dd/mm/yyyy'));
+fprintf(fid,'Data logging initiated : %s\n',datestr(now,'dd/mm/yyyy'));
 fprintf(fid,'Location : University of Nottingham Ningbo China\n');
 for minute=0:10
     idx=minute*60+1;
     if idx<=n
-        fprintf(fid, 'Minute %d Temperature %.2f C\n',minute,T(idx));
+        fprintf(fid,'Minute %d Temperature %.2f C\n',minute,T(idx));
     end
 end
 fprintf(fid,'Max temp %.2f C\n',T_max);
@@ -68,3 +68,4 @@ fprintf(fid,'Average temp %.2f C\n',T_avg);
 fprintf(fid,'Data logging terminated\n');
 fclose(fid);
 fprintf('Log file "capsule_temperature.txt" written.\n');
+% Task2
