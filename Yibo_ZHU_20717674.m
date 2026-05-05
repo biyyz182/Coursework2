@@ -68,4 +68,7 @@ fprintf(fid,'Average temp %.2f C\n',T_avg);
 fprintf(fid,'Data logging terminated\n');
 fclose(fid);
 fprintf('Log file "capsule_temperature.txt" written.\n');
-% Task2
+% Task 2: LED temperature monitor
+% Call the function (a must already exist from earlier)
+a=arduino('COM3','Uno');
+temp_monitor(a);
