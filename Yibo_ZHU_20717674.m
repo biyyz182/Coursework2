@@ -2,7 +2,7 @@
 % CW2
 % Yibo ZHU
 % biyyz182@nottingham.edu.cn
-% Test
+%% PRELIMINARY TASK - ARDUINO AND GIT INSTALLATION [5 MARKS]
 a=arduino('COM3','Uno');
 writeDigitalPin(a,'D2',1);
 pause(1);
@@ -13,7 +13,7 @@ for k = 1:10
     writeDigitalPin(a,'D2',0);
     pause(0.5);
 end
-% Task 1
+%% TASK 1 - READ TEMPERATURE DATA, PLOT, AND WRITE TO A LOG FILE [20 MARKS
 a=arduino('COM3','Uno');
 duration=600;                
 n=duration;          
@@ -68,10 +68,11 @@ fprintf(fid,'Average temp %.2f C\n',T_avg);
 fprintf(fid,'Data logging terminated\n');
 fclose(fid);
 fprintf('Log file "capsule_temperature.txt" written.\n');
-% Task 2: LED temperature monitor
-% Call the function (a must already exist from earlier)
+%% TASK 2 - LED TEMPERATURE MONITORING DEVICE IMPLEMENTATION [25 MARKS]
 a=arduino('COM3','Uno');
 temp_monitor(a);
-% Task 3 ：Temperature change rate monitoring and prediction
+%% TASK 3 - ALGORITHMS – TEMPERATURE PREDICTION [30 MARKS]
 a=arduino('COM3','Uno');
 temp_prediction(a);
+%% TASK 4 - REFLECTIVE STATEMENT [5 MARKS]
+% In the Word document

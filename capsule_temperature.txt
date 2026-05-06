@@ -1,0 +1,16 @@
+Data logging initiated : 05/05/2026
+Location : University of Nottingham Ningbo China
+Minute 0 Temperature 26.74 C
+Minute 1 Temperature 26.74 C
+Minute 2 Temperature 26.74 C
+Minute 3 Temperature 27.22 C
+Minute 4 Temperature 27.22 C
+Minute 5 Temperature 27.22 C
+Minute 6 Temperature 27.22 C
+Minute 7 Temperature 26.74 C
+Minute 8 Temperature 26.74 C
+Minute 9 Temperature 26.74 C
+Max temp 27.22 C
+Min temp 26.25 C
+Average temp 26.93 C
+Data logging terminated
