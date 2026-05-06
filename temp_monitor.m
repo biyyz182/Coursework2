@@ -10,8 +10,10 @@ function temp_monitor(a)
 green='D9';
 yellow='D10';
 red='D11';
+% arrays to store time and temperature for the plot
 times=[];
 temps=[];
+% set up the figure
 figure('Name','Real-Time Temperature Monitor');
 hLine=plot(NaN, NaN, 'b-','LineWidth',1.5);
 xlabel('Time (s)');
@@ -20,6 +22,7 @@ title('Live Temperature Monitor');
 grid on;
 xlim([0 60]);    
 ylim([10 35]);  
+% timing stuff
 t0=tic;                      
 lastSampleTime=-999;        
 lastYellowToggle=0;         
@@ -31,8 +34,7 @@ fprintf('Live monitor started. Press Ctrl+C to stop.\n');
         now=toc(t0);             
         if (now-lastSampleTime)>=1.0
             v=readVoltage(a,'A0');
-            T=(v-0.5)/0.01;  
-
+            T=(v-0.5)/0.01;          % conversion from voltage to C
             % store data
             times(end+1)=now;
             temps(end+1)=T;
@@ -41,15 +43,17 @@ fprintf('Live monitor started. Press Ctrl+C to stop.\n');
             % update live plot
             set(hLine,'XData',times,'YData',temps);
             if now>60
-                xlim([now-60, now]);
+                xlim([now-60, now]); % scroll
             end
             drawnow;
         end
+        % control LEDs 
+        % comfortable range: green on, others off
         if T>=18&&T<=24
             writeDigitalPin(a,green,1);
             writeDigitalPin(a,yellow,0);
             writeDigitalPin(a,red,0);
-
+        % too cold: blink yellow every 0.5s, others off
         elseif T<18
             writeDigitalPin(a,green,0);
             writeDigitalPin(a,red,0);
@@ -58,7 +62,7 @@ fprintf('Live monitor started. Press Ctrl+C to stop.\n');
                 writeDigitalPin(a,yellow,yellowState);
                 lastYellowToggle=now;
             end
-
+        % too hot: blink red every 0.25s, others off (T > 24)
         else 
             writeDigitalPin(a,green,0);
             writeDigitalPin(a,yellow,0);

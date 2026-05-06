@@ -14,7 +14,6 @@ for k = 1:10
     pause(0.5);
 end
 %% TASK 1 - READ TEMPERATURE DATA, PLOT, AND WRITE TO A LOG FILE [20 MARKS
-a=arduino('COM3','Uno');
 duration=600;                
 n=duration;          
 V=zeros(n,1);  
@@ -69,10 +68,8 @@ fprintf(fid,'Data logging terminated\n');
 fclose(fid);
 fprintf('Log file "capsule_temperature.txt" written.\n');
 %% TASK 2 - LED TEMPERATURE MONITORING DEVICE IMPLEMENTATION [25 MARKS]
-a=arduino('COM3','Uno');
 temp_monitor(a);
 %% TASK 3 - ALGORITHMS – TEMPERATURE PREDICTION [30 MARKS]
-a=arduino('COM3','Uno');
 temp_prediction(a);
 %% TASK 4 - REFLECTIVE STATEMENT [5 MARKS]
 % In the Word document

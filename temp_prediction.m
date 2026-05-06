@@ -11,16 +11,16 @@ function temp_prediction(a)
 green='D9';
 yellow='D10';
 red='D11';
-windowSize=5;          
-tempwindow=[];         
-timeWindow=[];         
+windowSize=5;    % how many recent points to use      
+tempwindow=[];   % timestamps for those points      
+timeWindow=[];   % temperatures for those points      
 tic;
 lastSample=-999;
 fprintf('Temperature prediction monitor started. Ctrl+C to stop.\n');
 while true
     now=toc;
     
-    % --- read sensor every ~1 second ---
+    % read sensor every ~1 second
     if (now-lastSample)>=1.0
         v=readVoltage(a,'A0');
         T=(v-0.5)/0.01;   % convert to deg C
@@ -37,25 +37,25 @@ while true
         lastSample = now;
     end
     
-    % --- compute rate only when we have enough data ---
+    % compute rate only when we have enough data
     if length(tempwindow)>=windowSize
         fit=polyfit(timeWindow,tempwindow,1);   % linear fit
-        rate_s=fit(1);                       % slope in C/s
-        rate_min=rate_s*60;        % convert to C/min
+        rate_s=fit(1);                          % slope in C/s
+        rate_min=rate_s*60;                     % convert to C/min
     else
         rate_s=0;
         rate_min=0;
     end
     
-    % --- prediction ---
-    T_current=tempwindow(end);                   % latest temperature
-    T_pred=T_current+rate_s*300;       % 5 minutes = 300 seconds
+    % prediction
+    T_current=tempwindow(end);       % latest temperature
+    T_pred=T_current+rate_s*300;     % 5 minutes = 300 seconds
     
-    % --- print to screen ---
+    % print to screen
     fprintf('Current: %.2f C | Rate: %+.2f C/min | Predicted in 5 min: %.2f C\n', ...
         T_current, rate_min, T_pred);
     
-    % --- LED logic (based on rate and comfort range) ---
+    % LED logic (based on rate and comfort range)
     incomfortrange=(T_current >= 18) && (T_current <= 24);
     ratestable=abs(rate_min)<= 4;
     
